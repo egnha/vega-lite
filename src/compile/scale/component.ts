@@ -7,7 +7,7 @@ export type ScaleComponentProps = Partial<Pick<VgScale,
   // All VgDomain property except domain.
   // (We exclude domain as we have a special "domains" array that allow us merge them all at once in assemble.)
   // TODO: also exclude domainRaw and property implement the right scaleComponent for selection domain
-  'name' | 'type' | 'domainRaw' | 'range' | 'clamp' | 'exponent' | 'interpolate' | 'nice' | 'padding' | 'paddingInner' | 'paddingOuter' | 'reverse' | 'round' | 'zero'
+  'name' | 'type' | 'domainRaw' | 'range' | 'clamp' | 'base' | 'exponent' | 'interpolate' | 'nice' | 'padding' | 'paddingInner' | 'paddingOuter' | 'reverse' | 'round' | 'zero'
 >>;
 
 export class ScaleComponent extends Split<ScaleComponentProps> {
