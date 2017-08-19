@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {Channel, hasScale, rangeType, SINGLE_DEF_CHANNELS, supportScaleType} from '../src/channel';
+import {Channel, isScaleChannel, rangeType, ScaleChannel, SINGLE_DEF_CHANNELS, supportScaleType} from '../src/channel';
 import {CHANNELS, NONSPATIAL_CHANNELS, NONSPATIAL_SCALE_CHANNELS, SCALE_CHANNELS, UNIT_CHANNELS} from '../src/channel';
 import {SCALE_TYPES, ScaleType} from '../src/scale';
 import {some, without} from '../src/util';
@@ -36,10 +36,10 @@ describe('channel', () => {
     });
   });
 
-  describe('hasScale', () => {
+  describe('isScaleChannel', () => {
     it('should return true for all scale channel', () => {
       for (const channel of SCALE_CHANNELS) {
-        assert(hasScale(channel));
+        assert(isScaleChannel(channel));
       }
     });
   });
@@ -63,16 +63,6 @@ describe('channel', () => {
       }
     });
 
-    it('row,column should support only band', () => {
-      for (const channel of ['row', 'column'] as Channel[]) {
-        assert(supportScaleType(channel, 'band'));
-        const nonBands = without<ScaleType>(SCALE_TYPES, ['band']);
-        for (const scaleType of nonBands) {
-          assert(!supportScaleType(channel, scaleType));
-        }
-      }
-    });
-
     it('shape should support only ordinal', () => {
       assert(supportScaleType('shape', 'ordinal'));
       const nonOrdinal = without<ScaleType>(SCALE_TYPES, ['ordinal']);
@@ -90,7 +80,7 @@ describe('channel', () => {
     it('x, y, size, opacity should support all scale type except ordinal and sequential', () => {
       // x,y should use either band or point for ordinal input
       const nonOrdinal = without<ScaleType>(SCALE_TYPES, ['ordinal', 'sequential']);
-      for (const channel of ['x', 'y', 'size', 'opacity'] as Channel[]) {
+      for (const channel of ['x', 'y', 'size', 'opacity'] as ScaleChannel[]) {
         assert(!supportScaleType(channel, 'ordinal'));
         assert(!supportScaleType(channel, 'sequential'));
         for (const scaleType of nonOrdinal) {

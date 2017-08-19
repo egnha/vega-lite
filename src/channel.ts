@@ -8,7 +8,7 @@ import {Encoding} from './encoding';
 import {Facet} from './facet';
 import {Mark} from './mark';
 import {SCALE_TYPES, ScaleType} from './scale';
-import {contains, toSet, without} from './util';
+import {toSet, without} from './util';
 
 
 export namespace Channel {
@@ -166,18 +166,11 @@ export function getSupportedMark(channel: Channel): SupportedMark {
   }
 }
 
-export function hasScale(channel: Channel) {
-  return !contains([DETAIL, TEXT, ORDER, TOOLTIP], channel);
-}
-
 // Position does not work with ordinal (lookup) scale and sequential (which is only for color)
 const POSITION_SCALE_TYPE_INDEX = toSet(without(SCALE_TYPES, ['ordinal', 'sequential'] as ScaleType[]));
 
-export function supportScaleType(channel: Channel, scaleType: ScaleType): boolean {
+export function supportScaleType(channel: ScaleChannel, scaleType: ScaleType): boolean {
   switch (channel) {
-    case ROW:
-    case COLUMN:
-      return scaleType === 'band'; // row / column currently supports band only
     case X:
     case Y:
     case SIZE: // TODO: size and opacity can support ordinal with more modification
