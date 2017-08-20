@@ -303,15 +303,6 @@ export interface ScaleConfig {
    * @minimum 0
    */
   maxStrokeWidth?: number;
-
-  /**
-   * The default collection of symbol shapes for mapping nominal fields to shapes of point marks (i.e., range of a `shape` scale).
-   * Each value should be one of: `"circle"`, `"square"`, `"cross"`, `"diamond"`, `"triangle-up"`, or `"triangle-down"`, or a custom SVG path.
-   *
-   * __Default value:__ `["circle", "square", "cross", "diamond", "triangle-up", "triangle-down"]`
-   *
-   */
-  shapes?: string[];
 }
 
 export const defaultScaleConfig = {
@@ -332,9 +323,7 @@ export const defaultScaleConfig = {
   minSize: 9, // Point size is area. For square point, 9 = 3 pixel ^ 2, not too small!
 
   minStrokeWidth: 1,
-  maxStrokeWidth: 4,
-
-  shapes: ['circle', 'square', 'cross', 'diamond', 'triangle-up', 'triangle-down']
+  maxStrokeWidth: 4
 };
 
 export interface ExtendedScheme {
