@@ -38,14 +38,17 @@ export type ScaleType = typeof ScaleType.LINEAR | typeof ScaleType.BIN_LINEAR |
 
 export const SCALE_TYPES: ScaleType[] = [
   // Continuous - Quantitative
-  'linear', 'bin-linear', 'log', 'pow', 'sqrt',
+  'linear', 'log', 'pow', 'sqrt',
   // Continuous - Time
   'time', 'utc',
   // Sequential
-  'sequential', // TODO: add 'quantile', 'quantize' when we really support them
+  'sequential',
   // Discrete
-  'ordinal', 'bin-ordinal', 'point', 'band',
-];
+  'ordinal', 'point', 'band',
+  // Discretizing
+  'bin-linear', 'bin-ordinal',
+  // TODO: add  'quantile', 'quantize', 'threshold' when we really support them
+] as ScaleType[];
 
 /**
  * Index for scale categories -- only scale of the same categories can be merged together.
@@ -499,9 +502,11 @@ export function scaleTypeSupportProperty(scaleType: ScaleType, propName: keyof S
     case 'domain':
     case 'reverse':
     case 'range':
-    case 'scheme':
       return true;
+    case 'scheme':
+      return contains(['sequential', 'ordinal', 'bin-ordinal', 'quantile', 'quantize'], scaleType);
     case 'interpolate':
+      // FIXME how about ordinal?
       return contains(['linear', 'bin-linear', 'pow', 'log', 'sqrt', 'utc', 'time'], scaleType);
     case 'round':
       return isContinuousToContinuous(scaleType) || scaleType === 'band' || scaleType === 'point';
@@ -516,10 +521,17 @@ export function scaleTypeSupportProperty(scaleType: ScaleType, propName: keyof S
     case 'nice':
       return isContinuousToContinuous(scaleType) || scaleType === 'sequential' || scaleType as any === 'quantize';
     case 'exponent':
-      return scaleType === 'pow' || scaleType === 'log';
+      return scaleType === 'pow';
+    case 'base':
+      return scaleType === 'log';
     case 'zero':
-      // TODO: what about quantize, threshold?
-      return scaleType === 'bin-ordinal' || (!hasDiscreteDomain(scaleType) && !contains(['log', 'time', 'utc', 'bin-linear'], scaleType));
+      return hasContinuousDomain(scaleType) && !contains([
+        'log',  // log scale cannot have zero value
+        'time', 'utc', // zero is not meaningful for time
+        'bin-linear', // binning should not automatically add zero
+        'threshold', // threshold requires custom domain so zero does not matter
+        'quantile' // quantile depends on distribution so zero does not matter
+      ], scaleType);
   }
   /* istanbul ignore next: should never reach here*/
   throw new Error(`Invalid scale property ${propName}.`);

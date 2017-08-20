@@ -134,15 +134,15 @@ export function fieldDefMatchScaleType(specifiedType: ScaleType, fieldDef: Field
     return specifiedType === undefined || hasDiscreteDomain(specifiedType);
   } else if (type === Type.TEMPORAL) {
     if (!fieldDef.timeUnit) {
-      return contains([ScaleType.TIME, ScaleType.UTC, undefined], specifiedType);
+      return contains([ScaleType.TIME, ScaleType.UTC, ScaleType.SEQUENTIAL, undefined], specifiedType);
     } else {
-      return contains([ScaleType.TIME, ScaleType.UTC, undefined], specifiedType) || hasDiscreteDomain(specifiedType);
+      return contains([ScaleType.TIME, ScaleType.UTC, ScaleType.SEQUENTIAL, undefined], specifiedType) || hasDiscreteDomain(specifiedType);
     }
   } else if (type === Type.QUANTITATIVE) {
     if (fieldDef.bin) {
       return specifiedType === ScaleType.BIN_LINEAR || specifiedType === ScaleType.BIN_ORDINAL;
     }
-    return contains([ScaleType.LOG, ScaleType.POW, ScaleType.SQRT, ScaleType.QUANTILE, ScaleType.QUANTIZE, ScaleType.LINEAR, undefined], specifiedType);
+    return contains([ScaleType.LOG, ScaleType.POW, ScaleType.SQRT, ScaleType.QUANTILE, ScaleType.QUANTIZE, ScaleType.LINEAR, ScaleType.SEQUENTIAL, undefined], specifiedType);
   }
 
   return true;
