@@ -22,6 +22,10 @@
                     "expr": "datetime(year(datum[\"Year\"]), 0, 1, 0, 0, 0, 0)"
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"Year\"] !== null && !isNaN(datum[\"Year\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "year_Year"

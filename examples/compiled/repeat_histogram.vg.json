@@ -38,6 +38,10 @@
                     }
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"Horsepower\"] !== null && !isNaN(datum[\"Horsepower\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "bin_maxbins_10_Horsepower",
@@ -105,6 +109,10 @@
                     }
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"Miles_per_Gallon\"] !== null && !isNaN(datum[\"Miles_per_Gallon\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "bin_maxbins_10_Miles_per_Gallon",
@@ -170,6 +178,10 @@
                     "extent": {
                         "signal": "child_Acceleration_bin_maxbins_10_Acceleration_extent"
                     }
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"Acceleration\"] !== null && !isNaN(datum[\"Acceleration\"])"
                 },
                 {
                     "type": "aggregate",

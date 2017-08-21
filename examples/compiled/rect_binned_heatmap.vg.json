@@ -52,6 +52,14 @@
                     }
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"IMDB_Rating\"] !== null && !isNaN(datum[\"IMDB_Rating\"])"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"Rotten_Tomatoes_Rating\"] !== null && !isNaN(datum[\"Rotten_Tomatoes_Rating\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "bin_maxbins_60_IMDB_Rating",

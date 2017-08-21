@@ -41,6 +41,10 @@
                     "as": "bin_maxbins_6_Acceleration_range"
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"Year\"] !== null && !isNaN(datum[\"Year\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "Year",

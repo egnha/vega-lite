@@ -33,6 +33,10 @@
                     }
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"IMDB_Rating\"] !== null && !isNaN(datum[\"IMDB_Rating\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "bin_maxbins_10_IMDB_Rating",

@@ -48,6 +48,10 @@
                     }
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"distance\"] !== null && !isNaN(datum[\"distance\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "bin_maxbins_20_distance",
@@ -93,6 +97,10 @@
                     }
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"delay\"] !== null && !isNaN(datum[\"delay\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "bin_maxbins_20_delay",
@@ -136,6 +144,10 @@
                     "extent": {
                         "signal": "child_time_bin_maxbins_20_time_extent"
                     }
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"time\"] !== null && !isNaN(datum[\"time\"])"
                 },
                 {
                     "type": "aggregate",

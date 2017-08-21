@@ -6,7 +6,7 @@ import {AggregateNode} from './aggregate';
 import {BinNode} from './bin';
 import {DataFlowNode, OutputNode} from './dataflow';
 import {FacetNode} from './facet';
-import {FilterInvalidNode} from './FilterInvalid';
+import {FilterInvalidNode} from './filterinvalid';
 import {ParseNode} from './formatparse';
 import {DataComponent} from './index';
 import {SourceNode} from './source';

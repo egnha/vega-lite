@@ -319,6 +319,10 @@
                     "type": "formula",
                     "expr": "toNumber(datum[\"Population_ages_15_64_of_total\"])",
                     "as": "Population_ages_15_64_of_total"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"Population_ages_15_64_of_total\"] !== null && !isNaN(datum[\"Population_ages_15_64_of_total\"])"
                 }
             ]
         },
@@ -330,6 +334,10 @@
                     "type": "formula",
                     "expr": "toNumber(datum[\"Population_ages_65_and_above_of_total\"])",
                     "as": "Population_ages_65_and_above_of_total"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"Population_ages_65_and_above_of_total\"] !== null && !isNaN(datum[\"Population_ages_65_and_above_of_total\"])"
                 }
             ]
         },
@@ -346,6 +354,14 @@
                     "type": "formula",
                     "expr": "toNumber(datum[\"Population_ages_65_and_above_of_total\"])",
                     "as": "Population_ages_65_and_above_of_total"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"Population_ages_15_64_of_total\"] !== null && !isNaN(datum[\"Population_ages_15_64_of_total\"])"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"Population_ages_65_and_above_of_total\"] !== null && !isNaN(datum[\"Population_ages_65_and_above_of_total\"])"
                 }
             ]
         }

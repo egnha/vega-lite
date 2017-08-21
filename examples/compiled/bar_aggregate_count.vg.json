@@ -33,6 +33,10 @@
                     }
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"precipitation\"] !== null && !isNaN(datum[\"precipitation\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "bin_maxbins_10_precipitation",

@@ -39,6 +39,10 @@
                     }
                 },
                 {
+                    "type": "filter",
+                    "expr": "datum[\"distance\"] !== null && !isNaN(datum[\"distance\"])"
+                },
+                {
                     "type": "aggregate",
                     "groupby": [
                         "bin_maxbins_10_distance",
@@ -86,6 +90,10 @@
                 {
                     "type": "filter",
                     "expr": "datum.delay < 500"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"distance\"] !== null && !isNaN(datum[\"distance\"])"
                 },
                 {
                     "type": "aggregate",
